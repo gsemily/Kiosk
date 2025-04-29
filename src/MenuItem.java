@@ -10,8 +10,16 @@ public class MenuItem{
         this.description = description;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
     //메뉴 출력
-    public String show() {
+    public String showItem() {
         return String.format("%-30s | W %.1f | %s", name, price, description);
     }
 }

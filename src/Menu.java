@@ -28,7 +28,7 @@ public class Menu {
     public void show(){
         int number = 1;
         for (MenuItem item : menuItems) {
-            System.out.println(number + ". " + item.show());
+            System.out.println(number + ". " + item.showItem());
             number++;
         }
     }
