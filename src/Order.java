@@ -1,12 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Order {
     private List<MenuItem> orderList = new ArrayList<>();
-
-    public Order() {
-        this.orderList = new ArrayList<>();
-    }
 
     //주문 추가
     public void addOrder(MenuItem menuItem) {
@@ -18,22 +15,21 @@ public class Order {
         return orderList;
     }
 
-    //수량
-    public int getNumberOfOrders() {
-        int number = 0;
-        for(MenuItem menuItem : orderList) {
-            number++;
-        }
-        return number;
+    public void removeMenu(String name){
+        List<MenuItem> filtered = orderList.stream()
+                .filter(i -> i.getName().equals(name))
+                .collect(Collectors.toList());
+        orderList.clear();
+        orderList.addAll(filtered);
     }
 
     //가격
-    public double getTotalPrice() {
+    public double getTotalPrice(CustomerType customerType) {
         double price = 0;
         for(MenuItem menuItem : orderList) {
             price += menuItem.getPrice();
         }
-        return price;
+        return price * (1 - customerType.getDiscountRate());
     }
 
     //주문취소

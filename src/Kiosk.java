@@ -17,6 +17,7 @@ public class Kiosk {
         while (true) {
             //상위 카테고리 메뉴 출력
             System.out.println("[ MAIN MENU ]");
+
             int number = 1;
             for (int i = 0; i < menu.size(); i++) {
                 System.out.println(number + ". " + menu.get(i).getCategory());
@@ -50,13 +51,29 @@ public class Kiosk {
                 System.out.println("\n[ Orders ]");
                 order.showOrder();
                 System.out.println("[ Total ]\nW " + order.getTotalPrice());
-                System.out.println("1. Order       2. Cancel");
+                System.out.println("1. 주문       2. 메뉴판");
                 System.out.print("> ");
 
                 //주문
                 int orderAnswer = scanner.nextInt();
                 if (orderAnswer == 1) {
-                    System.out.println("주문이 완료되었습니다. 금액은 W " + order.getTotalPrice() + "입니다.");
+                    //할인 정보
+                    int discountChoice = 0;
+                    while(true) {
+                        System.out.println("\n할인 정보를 입력해주세요.");
+                        System.out.println("1. 국가유공자 : 10% \n2. 군인     :  5%\n3. 학생     :  3%\n4. 일반     :  0%");
+                        System.out.print("> ");
+
+                        discountChoice = scanner.nextInt();
+                        if (discountChoice < 0 || discountChoice > 4){
+                            System.out.println("존재하지 않는 카테고리입니다.");
+                        }else
+                            break;
+                    }
+                    CustomerType customerType = CustomerType.values()[discountChoice - 1];
+                    double discountPrice = order.getTotalPrice(customerType);
+
+                    System.out.printf("\n주문이 완료되었습니다. 금액은 W %.1f 입니다.\n", discountPrice);
                     order.cancelOrder();  // 장바구니 초기화
                     continue;
                 } else if (orderAnswer == 2) {
@@ -65,12 +82,14 @@ public class Kiosk {
             } else if (categoryChoice == 5) {
                 System.out.println("주문을 취소하시겠습니까?");
                 System.out.println("1. Remove       2. Cancel");
-                System.out.println("> ");
+                System.out.print("> ");
 
+                //주문취소
                 int cancelAnswer = scanner.nextInt();
                 if (cancelAnswer == 1) {
                     order.cancelOrder(); // 장바구니 초기화
-                    System.out.println("주문이 취소되었습니다.");
+                    System.out.println("주문이 취소되었습니다.\n");
+                    continue;
                 } else if (cancelAnswer == 2) {
                     continue;
                 }
@@ -110,7 +129,7 @@ public class Kiosk {
 
                 if (orderCheck < 1 || orderCheck > 2) {
                     System.out.println("올바른 번호를 입력하십시오.");
-                } else break;
+                }else break;
             }
 
             //장바구니 추가
