@@ -17,7 +17,7 @@ public class Order {
 
     public void removeMenu(String name){
         List<MenuItem> filtered = orderList.stream()
-                .filter(i -> i.getName().equals(name))
+                .filter(i -> !i.getName().equals(name))
                 .collect(Collectors.toList());
         orderList.clear();
         orderList.addAll(filtered);

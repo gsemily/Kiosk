@@ -10,6 +10,7 @@ public enum CustomerType {
         this.discountRate = discountRate;
     }
 
+    //할인율 반환
     public double getDiscountRate() {
         return discountRate;
     }
