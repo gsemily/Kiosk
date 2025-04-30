@@ -76,7 +76,7 @@ public class Kiosk {
     private void processOrder(){
         System.out.println("아래와 같이 주문하시겠습니까?");
         System.out.println("\n[ Orders ]");
-        order.showOrder(); // 장바구니 목록 출력
+        System.out.println(order.show()); // 장바구니 목록 출력
         System.out.printf("\n[ Total ]\nW %.1f\n", order.getTotalPrice(CustomerType.REGULAR));
         System.out.println("1. 주문       2. 메뉴판");
 

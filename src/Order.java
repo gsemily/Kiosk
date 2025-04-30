@@ -38,9 +38,9 @@ public class Order {
     }
 
     //주문내역 출력
-    public void showOrder() {
-        for(MenuItem menuItem : orderList) {
-            System.out.println(menuItem.showItem());
-        }
+    public String show() {
+        return orderList.stream()
+                .map(MenuItem::showItem)
+                .collect(Collectors.joining("\n"));
     }
 }
