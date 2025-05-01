@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Menu {
     private String category;
@@ -26,10 +27,7 @@ public class Menu {
 
     //카테고리 출력
     public void show(){
-        int number = 1;
-        for (MenuItem item : menuItems) {
-            System.out.println(number + ". " + item.showItem());
-            number++;
-        }
+        IntStream.range(0, menuItems.size())
+                .forEach(i -> System.out.println((i + 1) + ". " + menuItems.get(i).showItem()));
     }
 }
